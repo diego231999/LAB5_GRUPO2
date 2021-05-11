@@ -61,13 +61,17 @@ public class JuegosController {
         }else{
             return "redirect:/juegos/";
         }
-
-
     }
 
     @PostMapping("/guardar")
     public String guardarJuegos(Model model, RedirectAttributes attr, @ModelAttribute("juego") @Valid Juegos juego, BindingResult bindingResult ){
 
+        if(juego.getIdjuego() == 0){
+            attr.addFlashAttribute("msgCreate","Juego creado exitosamente");
+        }else{
+            attr.addFlashAttribute("msgEdit","Juego editado exitosamente");
+        }
+        juegosRepository.save(juego);
         return "redirect:/juegos/";
     }
 

@@ -13,7 +13,8 @@
             <div class="container-fluid">
 
                 <a class="btn btn-primary mt-4 mb-4" >Nuevo Juego</a>
-                <div th:if="${msg != null}" th:text="${msg}" class="alert alert-success" role="alert"></div>
+                <div th:if="${msgEdit != null}" th:text="${msgEdit}" class="alert alert-warning" role="alert"></div>
+                <div th:if="${msgCreate != null}" th:text="${msgCreate}" class="alert alert-success" role="alert"></div>
                 <table class="table table-striped">
                     <thead>
                     <tr>
