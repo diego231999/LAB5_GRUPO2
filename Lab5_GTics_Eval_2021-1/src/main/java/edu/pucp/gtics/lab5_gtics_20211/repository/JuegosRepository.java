@@ -12,6 +12,6 @@ import java.util.List;
 
 public interface JuegosRepository extends JpaRepository<Juegos, Integer> {
     /** Completar */
-    @Query(value = "select j.nombre, j.descripcion, u.idusuario, j.image from juegos j , usuarios u, juegosxusuario ju where j.idjuego=ju.idjuego and u.idusuario=ju.idusuario and u.idusuario=?1;", nativeQuery = true)
+    @Query(value = "select j.nombre as nombrejuego, j.descripcion as descripcionjuego, j.image as url from juegos j, usuarios u, juegosxusuario ju where j.idjuego=ju.idjuego and u.idusuario=ju.idusuario and u.idusuario=?1", nativeQuery = true)
     List<JuegosUserDto> obtenerJuegosPorUser(int idusuario);
 }

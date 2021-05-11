@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/juego")
+@RequestMapping("/juegos")
 public class JuegosController {
     @Autowired
     JuegosRepository juegosRepository;
@@ -59,7 +59,7 @@ public class JuegosController {
             model.addAttribute("listaPlataforma",plataformasRepository.findAll());
             return "/juegos/editarFrm";
         }else{
-            return "redirect:/juegos/";
+            return "redirect:/juegos/lista";
         }
     }
 
@@ -72,7 +72,7 @@ public class JuegosController {
             attr.addFlashAttribute("msgEdit","Juego editado exitosamente");
         }
         juegosRepository.save(juego);
-        return "redirect:/juegos/";
+        return "redirect:/juegos/lista";
     }
 
     @GetMapping("/juegos/borrar")
@@ -83,5 +83,11 @@ public class JuegosController {
         }
         return "redirect:/juegos/lista";
     }
+    @GetMapping("/porusuario")
+    public String juegosXusuario(Model model) {
+        model.addAttribute("listaJuegosXusuario", juegosRepository.obtenerJuegosPorUser(1));
+        return "juegos/comprado";
+    }
+
 
 }

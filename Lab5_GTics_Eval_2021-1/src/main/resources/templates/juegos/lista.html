@@ -29,15 +29,15 @@
                     </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="juegos: ${listaJuegos}">
-                            <td>1</td>
+                        <tr th:each="juegos, vEstado: ${listaJuegos}">
+                            <td th:text="${vEstado.index+1}"></td>
                             <td><img th:src="${juegos.getImage()}" width="80" class="rounded" /></td>
                             <td th:text="${juegos.getNombre()}"></td>
                             <td th:text="${juegos.getDescripcion()}"></td>
                             <td th:text="${juegos.getPlataforma()}"></td>
                             <td th:text="${juegos.getPrecio()}"></td>
-                            <td><a class="btn btn-primary" href="/gameshop3/juegos/editar?id=2">Editar</a></td>
-                            <td><a class="btn btn-danger" href="/gameshop3/juegos/borrar?id=2">Borrar</a></td>
+                            <td><a class="btn btn-primary" th:href="@{'/gameshop3/juegos/editar?id='+${juegos.getIdjuego()}}">Editar</a></td>
+                            <td><a class="btn btn-danger" th:href="@{'/gameshop3/juegos/borrar?id='+${juegos.getIdjuego()}}">Borrar</a></td>
                         </tr>
                     </tbody>
                 </table>
