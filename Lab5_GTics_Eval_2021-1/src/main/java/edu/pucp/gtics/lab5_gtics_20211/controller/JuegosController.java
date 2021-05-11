@@ -22,30 +22,25 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/juegos")
+@RequestMapping("/juego")
 public class JuegosController {
-
+    @Autowired
+    JuegosRepository juegosRepository;
     @Autowired
     PlataformasRepository plataformasRepository;
 
-    @Autowired
-    JuegosRepository juegosRepository;
-/*
-
-    @GetMapping( ... )
-    public String listaJuegos ( ... ){
-               */
-/** Completar *//*
-
-    }
 
     @GetMapping(value = {"", "/", "/vista"})
-    public String vistaJuegos ( ... ){
-               */
-/** Completar *//*
-
+    public String VistaJuegos (Model model){
+        model.addAttribute("listaJuegos",juegosRepository.findAll(Sort.by("nombre")));
+        return "/juegos/vista";
     }
-*/
+
+    @GetMapping("/lista")
+    public String ListaJuegos (Model model){
+        model.addAttribute("listaJuegos",juegosRepository.findAll(Sort.by("precio")));
+        return"/juegos/lista";
+    }
 
     @GetMapping("/nuevo")
     public String nuevoJuegos(Model model, @ModelAttribute("juego") Juegos juego){
