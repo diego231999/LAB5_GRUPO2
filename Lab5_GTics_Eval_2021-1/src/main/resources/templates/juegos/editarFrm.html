@@ -12,6 +12,7 @@
         </div>
         <div class="container-fluid">
                 <form method="POST" th:action="@{'/juegos/guardar'}" th:object="${juego}">
+                    <input type="hidden" th:field="*{idjuego}">
                     <div class="form-group">
                         <label>Nombre</label>
                         <input type="text" class="form-control" th:field="*{nombre}" >
@@ -25,7 +26,7 @@
                     <div class="form-group">
                         <label>Plataforma</label>
                         <select class="form-control custom-select" th:field="*{plataforma.idplataforma}" >
-                          <option value="-1" disabled>- Seleccione -</option>
+                          <option value="-1" selected>- Seleccione -</option>
                           <option th:each="plataforma : ${listaPlataforma}"
                                     th:value="${plataforma.idplataforma}"
                                     th:text="${plataforma.nombre}"></option>
