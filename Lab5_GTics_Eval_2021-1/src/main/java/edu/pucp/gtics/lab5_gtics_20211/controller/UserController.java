@@ -25,15 +25,15 @@ public class UserController {
     @Autowired
     UserRepository userRepository;
 
- /*   @GetMapping()
+    @GetMapping("/user/signIn")
     public String signIn(){
-       *//** Completar *//*
+       return "user/signIn";
     }
 
-    @GetMapping()
+    @GetMapping("/user/signInRedirect")
     public String signInRedirect(Authentication auth, HttpSession session){
-       *//** Completar *//*
+       return "/juegos/lista";
 
-    }*/
+    }
 
 }
