@@ -21,35 +21,38 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-
+@RequestMapping("/juego")
 public class JuegosController {
+    @Autowired
+    JuegosRepository juegosRepository;
 
-
-
-    @GetMapping( ... )
-    public String listaJuegos ( ... ){
-               /** Completar */
-    }
 
     @GetMapping(value = {"", "/", "/vista"})
-    public String vistaJuegos ( ... ){
-               /** Completar */
+    public String VistaJuegos (Model model){
+        model.addAttribute("listaJuegos",juegosRepository.findAll(Sort.by("nombre")));
+        return "/juegos/vista";
     }
 
+    @GetMapping("/lista")
+    public String ListaJuegos (Model model){
+        model.addAttribute("listaJuegos",juegosRepository.findAll(Sort.by("precio")));
+        return"/juegos/lista";
+    }
+                /*
     @GetMapping( ... )
     public String nuevoJuegos(Model model, @ModelAttribute("juego") Juegos juego){
-               /** Completar */
+               /** Completar
     }
 
     @GetMapping( ... )
     public String editarJuegos(@RequestParam("id") int id, Model model){
-                /** Completar */
+                /** Completar
 
     }
 
     @PostMapping( ... )
     public String guardarJuegos(Model model, RedirectAttributes attr, @ModelAttribute("juego") @Valid Juegos juego, BindingResult bindingResult ){
-                /** Completar */
+                /** Completar
 
     }
 
@@ -61,5 +64,6 @@ public class JuegosController {
         }
         return "redirect:/juegos/lista";
     }
+    */
 
 }
