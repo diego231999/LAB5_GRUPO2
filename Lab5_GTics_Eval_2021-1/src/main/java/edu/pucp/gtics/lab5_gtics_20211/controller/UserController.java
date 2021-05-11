@@ -30,10 +30,10 @@ public class UserController {
        return "user/signIn";
     }
 
-//    @GetMapping()
-//    public String signInRedirect(Authentication auth, HttpSession session){
-//       /** Completar */
-//
-//    }
+    @GetMapping("/user/signInRedirect")
+    public String signInRedirect(Authentication auth, HttpSession session){
+       return "/juegos/lista";
+
+    }
 
 }

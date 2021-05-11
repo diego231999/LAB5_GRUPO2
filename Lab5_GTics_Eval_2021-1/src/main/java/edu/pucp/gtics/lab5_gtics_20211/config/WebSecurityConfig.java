@@ -22,12 +22,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         httpSecurity.formLogin()
                 .loginPage("/user/signIn") // for the Controlller
-                .loginProcessingUrl("/processLogin"); // for the POST request of the login form
+                .loginProcessingUrl("/processLogin") // for the POST request of the login form
 
-        httpSecurity.logout();
+                .defaultSuccessUrl("/user/signInRedirect", true);
+
+        httpSecurity.logout()
+            .logoutSuccessUrl("/");
 
         httpSecurity.authorizeRequests()
-                .antMatchers("/a/*", "/a/**").hasAnyAuthority("ADMIN", "USER")
+                .antMatchers("/juegos/*", "/juegos/**").hasAnyAuthority("ADMIN", "USER")
                 .anyRequest().permitAll();
                
     }
