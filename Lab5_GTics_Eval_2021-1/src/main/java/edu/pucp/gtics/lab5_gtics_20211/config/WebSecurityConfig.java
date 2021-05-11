@@ -14,21 +14,33 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    DataSource dataSource;
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    protected void configure(HttpSecurity httpSecurity) throws Exception {
 
-        /** Completar */
+        httpSecurity.formLogin()
+                .loginPage("/user/signIn") // for the Controlller
+                .loginProcessingUrl("/processLogin"); // for the POST request of the login form
+
+        httpSecurity.logout();
+
+        httpSecurity.authorizeRequests()
+                .antMatchers("/a/*", "/a/**").hasAnyAuthority("ADMIN", "USER")
+                .anyRequest().permitAll();
                
     }
 
-    @Autowired
-    DataSource datasource;
-
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception{
+        auth.jdbcAuthentication()
+                .dataSource(dataSource)
+                .passwordEncoder(new BCryptPasswordEncoder())
 
-        /** Completar */
+                .usersByUsernameQuery("select correo, password, enabled from usuarios WHERE correo = ?")
+                .authoritiesByUsernameQuery("select correo, autorizacion from usuarios where enabled=0x01 and correo = ?");
+
 
     }
 

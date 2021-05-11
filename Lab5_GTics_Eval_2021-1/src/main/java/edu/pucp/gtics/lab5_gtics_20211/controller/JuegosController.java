@@ -24,42 +24,42 @@ import java.util.Optional;
 
 public class JuegosController {
 
-
-
-    @GetMapping( ... )
-    public String listaJuegos ( ... ){
-               /** Completar */
-    }
-
-    @GetMapping(value = {"", "/", "/vista"})
-    public String vistaJuegos ( ... ){
-               /** Completar */
-    }
-
-    @GetMapping( ... )
-    public String nuevoJuegos(Model model, @ModelAttribute("juego") Juegos juego){
-               /** Completar */
-    }
-
-    @GetMapping( ... )
-    public String editarJuegos(@RequestParam("id") int id, Model model){
-                /** Completar */
-
-    }
-
-    @PostMapping( ... )
-    public String guardarJuegos(Model model, RedirectAttributes attr, @ModelAttribute("juego") @Valid Juegos juego, BindingResult bindingResult ){
-                /** Completar */
-
-    }
-
-    @GetMapping("/juegos/borrar")
-    public String borrarDistribuidora(@RequestParam("id") int id){
-        Optional<Juegos> opt = juegosRepository.findById(id);
-        if (opt.isPresent()) {
-            juegosRepository.deleteById(id);
-        }
-        return "redirect:/juegos/lista";
-    }
+//
+//
+//    @GetMapping( ... )
+//    public String listaJuegos ( ... ){
+//               /** Completar */
+//    }
+//
+//    @GetMapping(value = {"", "/", "/vista"})
+//    public String vistaJuegos ( ... ){
+//               /** Completar */
+//    }
+//
+//    @GetMapping( ... )
+//    public String nuevoJuegos(Model model, @ModelAttribute("juego") Juegos juego){
+//               /** Completar */
+//    }
+//
+//    @GetMapping( ... )
+//    public String editarJuegos(@RequestParam("id") int id, Model model){
+//                /** Completar */
+//
+//    }
+//
+//    @PostMapping( ... )
+//    public String guardarJuegos(Model model, RedirectAttributes attr, @ModelAttribute("juego") @Valid Juegos juego, BindingResult bindingResult ){
+//                /** Completar */
+//
+//    }
+//
+//    @GetMapping("/juegos/borrar")
+//    public String borrarDistribuidora(@RequestParam("id") int id){
+//        Optional<Juegos> opt = juegosRepository.findById(id);
+//        if (opt.isPresent()) {
+//            juegosRepository.deleteById(id);
+//        }
+//        return "redirect:/juegos/lista";
+//    }
 
 }
