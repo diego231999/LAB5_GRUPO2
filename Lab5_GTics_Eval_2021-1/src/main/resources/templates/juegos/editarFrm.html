@@ -16,12 +16,14 @@
                     <div class="form-group">
                         <label>Nombre</label>
                         <input type="text" class="form-control" th:field="*{nombre}" >
-                        
+                        <div class="text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+
                     </div>
                     <div class="form-group">
                         <label>Descripción</label>
                         <textarea class="form-control" th:field="*{descripcion}"></textarea>
-                        
+                        <div class="text-danger" th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></div>
+
                     </div>
                     <div class="form-group">
                         <label>Plataforma</label>
@@ -31,11 +33,13 @@
                                     th:value="${plataforma.idplataforma}"
                                     th:text="${plataforma.nombre}"></option>
                         </select>
-                        
+                        <div class="text-danger" th:if="${msg != null}" th:text="${msg}"></div>
+
                     </div>
                     <div class="form-group">
                         <label>Imagen URL</label>
                         <input type="text" class="form-control" th:field="*{image}" >
+
                     </div>
                     <div class="form-group">
                         <label>Precio</label>
@@ -45,7 +49,8 @@
                             </div>
                             <input type="text" class="form-control" th:field="*{precio}" >
                         </div>
-                        
+                        <div class="text-danger" th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"></div>
+
                     </div>
                     <input type="hidden" id="idjuego" name="idjuego" value="2" />
                     <a th:href="@{'/juegos/lista'}" class="btn btn-danger">Cancelar</a>

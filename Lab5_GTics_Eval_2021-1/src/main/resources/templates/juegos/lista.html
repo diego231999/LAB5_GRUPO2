@@ -12,9 +12,10 @@
             </div>
             <div class="container-fluid">
 
-                <a class="btn btn-primary mt-4 mb-4" >Nuevo Juego</a>
+                <a th:href="@{/juegos/nuevo}" class="btn btn-primary mt-4 mb-4" >Nuevo Juego</a>
                 <div th:if="${msgEdit != null}" th:text="${msgEdit}" class="alert alert-warning" role="alert"></div>
                 <div th:if="${msgCreate != null}" th:text="${msgCreate}" class="alert alert-success" role="alert"></div>
+                <div th:if="${msgDelete != null}" th:text="${msgDelete}" class="alert alert-danger" role="alert"></div>
                 <table class="table table-striped">
                     <thead>
                     <tr>
@@ -36,8 +37,8 @@
                             <td th:text="${juegos.getDescripcion()}"></td>
                             <td th:text="${juegos.getPlataforma().getDescripcion()}"></td>
                             <td th:text="${juegos.getPrecio()}"></td>
-                            <td><a class="btn btn-primary" th:href="@{'/gameshop3/juegos/editar?id='+${juegos.getIdjuego()}}">Editar</a></td>
-                            <td><a class="btn btn-danger" th:href="@{'/gameshop3/juegos/borrar?id='+${juegos.getIdjuego()}}">Borrar</a></td>
+                            <td><a class="btn btn-primary" th:href="@{'/juegos/editar?id='+${juegos.getIdjuego()}}">Editar</a></td>
+                            <td><a class="btn btn-danger" th:href="@{'/juegos/borrar?id='+${juegos.getIdjuego()}}">Borrar</a></td>
                         </tr>
                     </tbody>
                 </table>

@@ -66,6 +66,12 @@ public class JuegosController {
     @PostMapping("/guardar")
     public String guardarJuegos(Model model, RedirectAttributes attr, @ModelAttribute("juego") @Valid Juegos juego, BindingResult bindingResult ){
 
+        if(bindingResult.hasFieldErrors() || juego.getPlataforma().getIdplataforma() == -1){
+            model.addAttribute("msg","Ingrese una plataforma");
+            model.addAttribute("listaPlataforma",plataformasRepository.findAll());
+            return "/juegos/editarFrm";
+        }
+
         if(juego.getIdjuego() == 0){
             attr.addFlashAttribute("msgCreate","Juego creado exitosamente");
         }else{
@@ -75,12 +81,13 @@ public class JuegosController {
         return "redirect:/juegos/lista";
     }
 
-    @GetMapping("/juegos/borrar")
-    public String borrarDistribuidora(@RequestParam("id") int id){
+    @GetMapping("borrar")
+    public String borrarDistribuidora(@RequestParam("id") int id, RedirectAttributes attr){
         Optional<Juegos> opt = juegosRepository.findById(id);
         if (opt.isPresent()) {
             juegosRepository.deleteById(id);
         }
+        attr.addFlashAttribute("msgDelete","Juego borrado exitosamente");
         return "redirect:/juegos/lista";
     }
     @GetMapping("/porusuario")
