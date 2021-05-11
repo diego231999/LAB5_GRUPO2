@@ -6,7 +6,7 @@
 <body>
 <div th:fragment="header(option)">
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
-        <a class="navbar-brand" th:href="@{/juegos/lista}">
+        <a class="navbar-brand" th:href="@{/}">
             <img th:src="@{/img/icon.png}" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
             GameShop3 [Lab 5]
         </a>
@@ -15,7 +15,12 @@
         </button>
         <div class="collapse navbar-collapse justify-content-star" id="navbar-app">
             <ul class="navbar-nav">
-                <li class="nav-item active">
+                <li sec:authorize="hasAnyAuthority('USER')"
+                    class="nav-item active">
+                    <a class="nav-link" th:href="@{/juegos/porusuario}">Juegos</a>
+                </li>
+                <li sec:authorize="hasAnyAuthority('ADMIN')"
+                    class="nav-item active">
                     <a class="nav-link" th:href="@{/juegos}">Juegos</a>
                 </li>
                 <li sec:authorize="hasAnyAuthority('ADMIN')"

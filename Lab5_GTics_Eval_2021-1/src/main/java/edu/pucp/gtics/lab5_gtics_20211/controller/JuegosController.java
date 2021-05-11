@@ -16,14 +16,17 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.net.JarURLConnection;
 import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/juegos")
 public class JuegosController {
+    @Autowired
+    UserRepository userRepository;
+
     @Autowired
     JuegosRepository juegosRepository;
     @Autowired
@@ -36,20 +39,20 @@ public class JuegosController {
         return "/juegos/vista";
     }
 
-    @GetMapping("/lista")
+    @GetMapping(value = {"/juegos/lista","/juegos","/juegos/"})
     public String ListaJuegos (Model model){
         model.addAttribute("listaJuegos",juegosRepository.findAll(Sort.by("precio")));
         return"/juegos/lista";
     }
 
-    @GetMapping("/nuevo")
+    @GetMapping("/juegos/nuevo")
     public String nuevoJuegos(Model model, @ModelAttribute("juego") Juegos juego){
 
         model.addAttribute("listaPlataforma",plataformasRepository.findAll());
         return "/juegos/editarFrm";
     }
 
-    @GetMapping("/editar")
+    @GetMapping("/juegos/editar")
     public String editarJuegos(@RequestParam("id") int id, Model model, @ModelAttribute("juego") Juegos juego){
         Optional<Juegos> juegosOpt = juegosRepository.findById(id);
 
@@ -63,7 +66,7 @@ public class JuegosController {
         }
     }
 
-    @PostMapping("/guardar")
+    @PostMapping("/juegos/guardar")
     public String guardarJuegos(Model model, RedirectAttributes attr, @ModelAttribute("juego") @Valid Juegos juego, BindingResult bindingResult ){
 
         if(bindingResult.hasFieldErrors() || juego.getPlataforma().getIdplataforma() == -1){
@@ -81,7 +84,7 @@ public class JuegosController {
         return "redirect:/juegos/lista";
     }
 
-    @GetMapping("borrar")
+    @GetMapping("/juegos/borrar")
     public String borrarDistribuidora(@RequestParam("id") int id, RedirectAttributes attr){
         Optional<Juegos> opt = juegosRepository.findById(id);
         if (opt.isPresent()) {
@@ -90,11 +93,9 @@ public class JuegosController {
         attr.addFlashAttribute("msgDelete","Juego borrado exitosamente");
         return "redirect:/juegos/lista";
     }
-    @GetMapping("/porusuario")
-    public String juegosXusuario(Model model) {
+    @GetMapping("/juegos/porusuario")
+    public String juegosXusuario(Model model, HttpSession session) {
         model.addAttribute("listaJuegosXusuario", juegosRepository.obtenerJuegosPorUser(1));
         return "juegos/comprado";
     }
-
-
 }

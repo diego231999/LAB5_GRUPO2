@@ -19,10 +19,12 @@
                     <form th:action="@{/processLogin}" method="post">
 
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                            <input class="form-control" id="username" placeholder="Correo" type="text" name="username">
+                            <label for="username">Usuario</label>
+                            <input class="form-control mb-4" id="username" placeholder="Correo" type="text" name="username">
                         </div>
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                            <input class="form-control" id="password" placeholder="Contraseña" type="password" name="password">
+                            <label for="password">Password</label>
+                            <input class="form-control mb-4" id="password" placeholder="Contraseña" type="password" name="password">
                         </div>
 
 

@@ -12,15 +12,13 @@
             </div>
             <div class="container-fluid">
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 card-app">
-                    <div class="col mb-4">
+                    <div class="col mb-4" th:each="juegosporUser: ${listaJuegosXusuario}">
                         <div class="card" >
-                            <tr th:each="juegosporUser: ${listaJuegosXusuario}">
-                                <img class="card-img-top" th:src="${juegosporUser.getUrl()}" alt="Card image cap">
-                                <div class="card-body">
-                                    <h5 class="card-title" th:text="${juegosporUser.getNombreJuego()}"></h5>
-                                    <p class="card-text" th:text="${juegosporUser.getDescripcionJuego()}"></p>
-                                </div>
-                            </tr>
+                            <img class="card-img-top" th:src="${juegosporUser.getUrl()}" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title" th:text="${juegosporUser.getNombreJuego()}"></h5>
+                                <p class="card-text" th:text="${juegosporUser.getDescripcionJuego()}"></p>
+                            </div>
                         </div>
                     </div>
                 </div>

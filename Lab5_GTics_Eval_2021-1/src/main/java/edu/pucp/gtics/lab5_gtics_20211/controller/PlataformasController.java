@@ -67,11 +67,12 @@ public class PlataformasController {
     }
 
     @GetMapping("/borrar")
-    public String borrarPlataforma(@RequestParam("id") int id){
+    public String borrarPlataforma(@RequestParam("id") int id, RedirectAttributes attr){
         Optional<Plataformas> opt = plataformasRepository.findById(id);
         if (opt.isPresent()) {
             plataformasRepository.deleteById(id);
         }
+        attr.addFlashAttribute("msg", "Plataforma borrada exitosamente");
         return "redirect:/plataformas/lista";
     }
 
