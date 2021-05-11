@@ -30,7 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .logoutSuccessUrl("/");
 
         httpSecurity.authorizeRequests()
-                .antMatchers("/juegos/*", "/juegos/**").hasAnyAuthority("ADMIN", "USER")
+                .antMatchers("/juegos","/juegos/**").hasAnyAuthority("ADMIN","USER")
                 .anyRequest().permitAll();
                
     }

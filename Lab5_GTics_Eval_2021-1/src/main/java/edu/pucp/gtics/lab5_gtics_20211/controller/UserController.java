@@ -33,7 +33,6 @@ public class UserController {
     @GetMapping("/user/signInRedirect")
     public String signInRedirect(Authentication auth, HttpSession session){
        return "redirect:/juegos/lista";
-
     }
 
 }
