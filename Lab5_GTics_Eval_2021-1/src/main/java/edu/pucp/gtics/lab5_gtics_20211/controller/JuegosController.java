@@ -17,43 +17,63 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.net.JarURLConnection;
 import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/juego")
+@RequestMapping("/juegos")
 public class JuegosController {
+
+    @Autowired
+    PlataformasRepository plataformasRepository;
+
     @Autowired
     JuegosRepository juegosRepository;
+/*
 
+    @GetMapping( ... )
+    public String listaJuegos ( ... ){
+               */
+/** Completar *//*
+
+    }
 
     @GetMapping(value = {"", "/", "/vista"})
-    public String VistaJuegos (Model model){
-        model.addAttribute("listaJuegos",juegosRepository.findAll(Sort.by("nombre")));
-        return "/juegos/vista";
-    }
+    public String vistaJuegos ( ... ){
+               */
+/** Completar *//*
 
-    @GetMapping("/lista")
-    public String ListaJuegos (Model model){
-        model.addAttribute("listaJuegos",juegosRepository.findAll(Sort.by("precio")));
-        return"/juegos/lista";
     }
-                /*
-    @GetMapping( ... )
+*/
+
+    @GetMapping("/nuevo")
     public String nuevoJuegos(Model model, @ModelAttribute("juego") Juegos juego){
-               /** Completar
+
+        model.addAttribute("listaPlataforma",plataformasRepository.findAll());
+        return "/juegos/editarFrm";
     }
 
-    @GetMapping( ... )
-    public String editarJuegos(@RequestParam("id") int id, Model model){
-                /** Completar
+    @GetMapping("/editar")
+    public String editarJuegos(@RequestParam("id") int id, Model model, @ModelAttribute("juego") Juegos juego){
+        Optional<Juegos> juegosOpt = juegosRepository.findById(id);
+
+        if(juegosOpt.isPresent()){
+            juego = juegosOpt.get();
+            model.addAttribute("juego",juego);
+            model.addAttribute("listaPlataforma",plataformasRepository.findAll());
+            return "/juegos/editarFrm";
+        }else{
+            return "redirect:/juegos/";
+        }
+
 
     }
 
-    @PostMapping( ... )
+    @PostMapping("/guardar")
     public String guardarJuegos(Model model, RedirectAttributes attr, @ModelAttribute("juego") @Valid Juegos juego, BindingResult bindingResult ){
-                /** Completar
 
+        return "redirect:/juegos/";
     }
 
     @GetMapping("/juegos/borrar")
@@ -64,6 +84,5 @@ public class JuegosController {
         }
         return "redirect:/juegos/lista";
     }
-    */
 
 }
